@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About - Oral Cancer Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            /* Body styles are now in static/style.css */
+        }
+        .content {
+            line-height: 1.6;
+        }
+        .disclaimer {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="about-page">
+    <div class="navbar">
+        <div class="logo">Oral Cancer Detection</div>
+        <button class="navbar-toggle" id="navbarToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
+            {% if logged_in %}
+            <a href="/logout">Logout</a>
+            {% else %}
+            <a href="/login">Login</a>
+            {% endif %}
+            <a href="/about">About</a>
+        </div>
+    </div>
+    
+    <div class="container">
+    <h1>About Oral Cancer Detection</h1>
+    <div class="content">
+        <p>This application uses machine learning to analyze images of oral tissue and detect potential signs of oral cancer.</p>
+        
+        <h2>How it works</h2>
+        <p>The system analyzes uploaded images of oral tissue and provides a prediction along with a confidence score. The analysis is based on machine learning models trained to recognize patterns associated with oral cancer.</p>
+        
+        <h2>Important Notes</h2>
+        <div class="disclaimer">
+            <p><strong>Disclaimer:</strong> This application is for educational and research purposes only. It should not be used as a replacement for professional medical diagnosis. Always consult healthcare professionals for medical concerns.</p>
+        </div>
+    </div>
+    
+    <p style="text-align: center; margin-top: 30px;"><a href="/" class="abstract-button">Back to Home</a></p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbarToggle = document.getElementById('navbarToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            // Toggle mobile menu
+            navbarToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navLinks.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.navbar')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+
+            // Close mobile menu when clicking a link
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

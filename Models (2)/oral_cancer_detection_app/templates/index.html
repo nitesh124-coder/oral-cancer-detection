@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oral Cancer Detection System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">Oral Cancer Detection</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12 text-center mb-5">
+                <h1>Oral Cancer Detection System</h1>
+                <p class="lead">Upload an image of oral tissue for automated cancer detection</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card shadow">
+                    <div class="card-header bg-secondary text-white">
+                        <h4 class="mb-0">Upload Image</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="upload-form" enctype="multipart/form-data">
+                            <div class="mb-4">
+                                <label for="file-upload" class="form-label">Select an image:</label>
+                                <input type="file" class="form-control" id="file-upload" name="file" accept="image/*" required>
+                                <div class="form-text">Supported formats: JPG, PNG, JPEG</div>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Analyze Image</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-8">
+                <div id="result-container" class="card shadow d-none">
+                    <div class="card-header bg-info text-white">
+                        <h4 class="mb-0">Analysis Results</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="preview-container">
+                                    <h5>Uploaded Image</h5>
+                                    <img id="preview-image" class="img-fluid rounded" src="" alt="Preview">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="prediction-results">
+                                    <h5>Diagnosis</h5>
+                                    <div id="prediction-text" class="alert alert-info"></div>
+                                    <div class="progress mb-3">
+                                        <div id="confidence-bar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                    <p id="confidence-text"></p>
+                                    <div class="alert alert-warning">
+                                        <p id="message-text"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white mt-5 py-4">
+        <div class="container text-center">
+            <p>Oral Cancer Detection System | Powered by AI</p>
+            <p class="small">Disclaimer: This is a research tool and should not replace professional medical advice.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fileInput = document.getElementById('file-upload');
+            if (!fileInput.files[0]) {
+                alert('Please select a file to upload');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            
+            // Show preview of image
+            const previewImage = document.getElementById('preview-image');
+            previewImage.src = URL.createObjectURL(fileInput.files[0]);
+            
+            // Show loading state
+            document.getElementById('prediction-text').innerHTML = 'Analyzing...';
+            document.getElementById('result-container').classList.remove('d-none');
+            
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('prediction-text').innerHTML = data.error;
+                    return;
+                }
+                
+                // Display results
+                document.getElementById('prediction-text').innerHTML = data.prediction;
+                document.getElementById('confidence-text').innerHTML = `Confidence: ${(data.confidence * 100).toFixed(1)}%`;
+                document.getElementById('confidence-bar').style.width = `${data.confidence * 100}%`;
+                document.getElementById('message-text').innerHTML = data.message;
+                
+                // Set color based on prediction
+                if (data.prediction.toLowerCase().includes('cancer') || data.prediction.toLowerCase().includes('malignant')) {
+                    document.getElementById('prediction-text').className = 'alert alert-danger';
+                } else {
+                    document.getElementById('prediction-text').className = 'alert alert-success';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('prediction-text').innerHTML = 'Error processing request. Please try again.';
+            });
+        });
+    </script>
+</body>
+</html> 

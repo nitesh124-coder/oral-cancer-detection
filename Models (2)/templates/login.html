@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Oral Cancer Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Specific Login Page Styles (override general styles where needed) */
+        body.login-page {
+            background: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); /* Example gradient */
+            color: #333; /* Dark text for consistency with lighter background */
+            display: flex; /* Use flexbox for centering */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .navbar {
+            /* Keeping navbar styles from static/style.css */
+            position: absolute; /* Position navbar absolutely at the top */
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Make navbar slightly transparent on this background */
+        }
+
+        .login-wrapper {
+            text-align: center;
+            margin-top: 60px; /* Space from the absolute navbar */
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            border-radius: 50%;
+            margin: 0 auto 30px auto; /* Center and add space below */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3em; /* Size for potential icon */
+            color: #555; /* Icon color */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            color: #333; /* Dark text */
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            max-width: 350px; /* Adjust width */
+            width: 90%;
+            text-align: center;
+        }
+
+        .login-container h1 {
+            color: #333; /* Dark heading color */
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+            position: relative;
+        }
+
+        .form-group label {
+            display: none; /* Hide labels, use placeholders in inputs */
+        }
+
+        .form-group .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 1.1em;
+        }
+
+        .form-group .password-toggle {
+            left: auto;
+            right: 15px;
+            cursor: pointer;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: calc(100% - 50px); /* Adjust width for icon and padding */
+            padding: 12px 12px 12px 40px; /* Add left padding for icon */
+            border: 1px solid #ddd;
+            border-radius: 25px; /* More rounded corners */
+            background-color: #fff; /* White background */
+            color: #333;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+         .form-group input[type="text"]::placeholder,
+         .form-group input[type="password"]::placeholder {
+             color: #aaa; /* Placeholder color */
+         }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="password"]:focus {
+            border-color: #555; /* Darker border on focus */
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05), 0 0 8px rgba(85, 85, 85, 0.2); /* Subtle glow */
+            outline: none;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 0.9em;
+        }
+
+        .options label {
+            display: inline-block;
+            margin-bottom: 0; /* Remove bottom margin */
+            font-weight: normal;
+            color: #555; /* Darker text */
+        }
+
+        .options input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .options a {
+            color: #555; /* Darker link color */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .options a:hover {
+            color: #333; /* Darker color on hover */
+            text-decoration: underline;
+        }
+
+        .login-button {
+            display: block; /* Make button a block element */
+            width: 100%; /* Full width button */
+            background-color: #555; /* Dark grey button color */
+            color: white;
+            padding: 12px; /* Adjust padding */
+            border: none;
+            border-radius: 25px; /* More rounded */
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-button:hover {
+            background-color: #333; /* Darker grey on hover */
+            transform: translateY(-1px); /* Subtle lift */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-button:active {
+            transform: translateY(0); /* Press down */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Error message style */
+        .login-container .error-message {
+            color: red; /* Red text for error */
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        /* Basic Responsiveness */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px;
+            }
+            .avatar {
+                 width: 80px;
+                 height: 80px;
+                 font-size: 2.5em;
+            }
+             .login-container h1 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+            .form-group input[type="text"],
+            .form-group input[type="password"] {
+                 padding: 10px 10px 10px 35px; /* Adjust padding for smaller icon/size */
+                 font-size: 0.9em;
+            }
+            .form-group .input-icon {
+                 font-size: 1em;
+                 left: 10px;
+            }
+            .options {
+                 flex-direction: column;
+                 align-items: flex-start;
+                 margin-bottom: 20px;
+            }
+            .options label,
+            .options a {
+                margin-bottom: 10px;
+            }
+             .login-button {
+                 padding: 10px;
+                 font-size: 1em;
+            }
+        }
+
+    </style>
+</head>
+<body class="login-page">
+    <div class="navbar">
+        <div class="logo">Oral Cancer Detection</div>
+        <button class="navbar-toggle" id="navbarToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
+            {% if logged_in %}
+            <a href="/logout">Logout</a>
+            {% else %}
+            <a href="/login">Login</a>
+            {% endif %}
+            <a href="/about">About</a>
+        </div>
+    </div>
+    
+    <div class="login-wrapper">
+         <div class="avatar"><i class="fas fa-user"></i></div>
+        <div class="login-container">
+            <h1>Login</h1>
+            {% if error %}
+            <p class="error-message">{{ error }}</p>
+            {% endif %}
+            <form method="post">
+                <div class="form-group">
+                     <i class="input-icon fas fa-user"></i>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                     <i class="input-icon fas fa-lock"></i>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <i class="input-icon password-toggle fas fa-eye" id="passwordToggle"></i>
+                </div>
+                 <div class="options">
+                     <label>
+                         <input type="checkbox" name="remember_me"> Remember me
+                     </label>
+                     <a href="#">Forgot Password?</a>
+                 </div>
+                <button type="submit" class="login-button">Login</button>
+            </form>
+             <p class="signup-link" style="margin-top: 20px; font-size: 0.9em;">Don't have an account? <a href="/signup">Sign Up</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('password');
+            const passwordToggle = document.getElementById('passwordToggle');
+            const navbarToggle = document.getElementById('navbarToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            // Password toggle functionality
+            passwordToggle.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+
+            // Toggle mobile menu
+            navbarToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navLinks.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.navbar')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+
+            // Close mobile menu when clicking a link
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

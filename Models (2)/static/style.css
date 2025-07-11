@@ -1,0 +1,802 @@
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333; /* Default text color */
+    padding-top: 70px;
+}
+
+/* Navbar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Distribute items with space between */
+    align-items: center;
+    padding: 15px 20px; /* Restore original padding */
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Restore original gap */
+    flex-shrink: 0; /* Prevent the container from shrinking */
+    flex-wrap: wrap; /* Allow links to wrap */
+    overflow-x: visible; /* Remove horizontal scrolling */
+    padding-right: 35px; /* Add more right padding to shift links left */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    white-space: normal; /* Allow text to wrap */
+    padding: 8px 1px; /* Further reduced horizontal padding */
+    border-radius: 4px;
+}
+
+.nav-links a:hover {
+    color: #007bff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 15px; /* Adjusted padding for smaller screens */
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+        transform: translateY(-150%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        border-radius: 4px;
+    }
+
+    .nav-links a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Adjust body padding for fixed navbar */
+body {
+    padding-top: 70px;
+}
+
+/* Specific page adjustments */
+body.login-page,
+body.signup-page {
+    padding-top: 0;
+}
+
+body.login-page .navbar,
+body.signup-page .navbar {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Hero Section Styles (Home Page) */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 500px; /* Adjust height as needed */
+    background-image: url('/images/background.webp'); /* Use the background image from the images folder */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden; /* Hide overflowing parts of the background image */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)); /* Darker gradient overlay */
+    z-index: -1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1; /* Above background and overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: white;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 3.5em; /* Larger title */
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow */
+}
+
+.hero-content p {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.abstract-button {
+    background-color: #007bff; /* Primary button color */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px; /* Rounded button */
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none; /* Remove underline from link */
+}
+
+.abstract-button:hover {
+    background-color: #0056b3; /* Darker hover color */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* General Container and Layout Styles */
+.container {
+    max-width: 900px; /* Slightly wider container */
+    margin: 40px auto; /* More vertical space */
+    padding: 40px; /* Increased padding */
+    background-color: #ffffff; /* White background for content areas */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+    border-radius: 10px; /* More rounded corners */
+}
+
+/* Project Details Section Styles (Analyze Page) */
+.project-details {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee; /* Separator line */
+}
+
+.project-details h2 {
+    color: #c1a16a; /* Gold-like color for section headings */
+    border-bottom: none; /* Remove underline */
+    padding-bottom: 0;
+    margin-bottom: 10px;
+}
+
+.project-details p {
+    margin-bottom: 20px;
+}
+
+/* General Form Styles */
+.upload-form, form {
+    /* Keeping the dashed border for upload form */
+    border: 2px dashed #ccc;
+    padding: 30px; /* Consistent padding */
+    text-align: center;
+    margin: 30px auto; /* Center form and add vertical space */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f8f8f8; /* Light grey background for forms */
+    max-width: 600px; /* Limit form width */
+}
+
+.form-group {
+    margin-bottom: 25px; /* Increased space between form groups */
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px; /* More space below labels */
+    font-weight: bold;
+    color: #555; /* Darker label color */
+    font-size: 1em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="file"] {
+    width: calc(100% - 24px); /* Adjust for padding and border */
+    padding: 12px; /* Consistent padding */
+    border: 1px solid #ddd; /* Lighter border */
+    border-radius: 5px; /* Slightly more rounded corners */
+    background-color: #fff; /* White input background */
+    color: #333; /* Darker text color */
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* Subtle inner shadow */
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="file"]:focus {
+    border-color: #c1a16a; /* Highlight border on focus */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1), 0 0 8px rgba(193, 161, 106, 0.4); /* Glow effect on focus */
+    outline: none; /* Remove default outline */
+}
+
+button, .abstract-button {
+    display: inline-block; /* Ensure buttons are block for padding/margin */
+    background-color: #c1a16a; /* Gold-like button color */
+    color: white;
+    padding: 14px 30px; /* More padding */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-transform: uppercase; /* Uppercase text */
+    transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth transitions */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+button:hover, .abstract-button:hover {
+    background-color: #a68b5e; /* Darker gold on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+button:active, .abstract-button:active {
+    transform: translateY(0); /* Press down effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow on active */
+}
+
+/* Image Container Styles */
+.image-container {
+    text-align: center;
+    margin-bottom: 30px; /* More space below the image */
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd; /* Subtle border around images */
+    border-radius: 8px; /* Rounded corners for images */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for images */
+}
+
+/* Result Display Styles */
+.result {
+    margin-top: 40px; /* More space above results */
+    padding: 30px; /* Increased padding */
+    border: 1px solid #ddd; /* Lighter border */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background */
+    display: none; /* Hidden by default */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    line-height: 1.6; /* Improved readability */
+}
+
+/* Result Color Coding */
+.result.normal {
+    background-color: #e8f5e9; /* Light green */
+    border-color: #a5d6a7; /* Green border */
+    color: #2e7d32; /* Dark green text */
+}
+
+.result.benign {
+    background-color: #fff9c4; /* Light yellow */
+    border-color: #ffee58; /* Yellow border */
+    color: #fbc02d; /* Dark yellow text */
+}
+
+.result.potentially_malignant {
+    background-color: #ffccbc; /* Light orange */
+    border-color: #ff8a65; /* Orange border */
+    color: #e64a19; /* Dark orange text */
+}
+
+.result.malignant {
+    background-color: #ffcdd2; /* Light red */
+    border-color: #ef9a9a; /* Red border */
+    color: #c62828; /* Dark red text */
+}
+
+.result h3 {
+    color: #333; /* Dark grey heading color for results */
+    margin-top: 0;
+    font-size: 1.4em;
+    margin-bottom: 15px;
+}
+
+.result p {
+    margin-bottom: 10px; /* Space between paragraphs */
+    line-height: 1.6; /* Improved readability */
+    color: #555; /* Medium grey text */
+}
+
+/* Typography */
+h1, h2, h3 {
+    color: #333; /* Dark grey for headings */
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 2.5em; /* Slightly larger main headings */
+    color: #333; /* Ensure main headings are dark */
+}
+
+h2 {
+    font-size: 1.8em; /* Slightly larger subheadings */
+    border-bottom: 1px solid #eee; /* Subtle underline */
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    color: #555; /* Medium grey for subheadings */
+}
+
+h3 {
+    font-size: 1.4em;
+}
+
+p {
+    color: #555; /* Medium grey for paragraphs */
+    margin-bottom: 15px;
+    line-height: 1.7; /* Increased line height for better readability */
+}
+
+/* Specific Login Page Styles (override general styles where needed) */
+body.login-page {
+    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%); /* A different gradient for variation */
+    color: #333; /* Dark text for consistency with lighter background */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px; /* Add some padding */
+    box-sizing: border-box; /* Include padding in total size */
+}
+
+.login-wrapper {
+    text-align: center;
+    margin-top: 80px; /* More space from the absolute navbar */
+    position: relative; /* Needed for potential absolute positioning of elements inside */
+    z-index: 1; /* Ensure login content is above the background */
+}
+
+.avatar {
+    width: 120px; /* Slightly larger avatar */
+    height: 120px; /* Slightly larger avatar */
+    background-color: rgba(255, 255, 255, 0.9); /* Less transparent white */
+    border-radius: 50%;
+    margin: 0 auto 40px auto; /* Center and add more space below */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4em; /* Larger icon size */
+    color: #555; /* Icon color */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 1); /* Fully opaque white background */
+    color: #333; /* Dark text */
+    padding: 50px; /* More padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Stronger and wider shadow */
+    max-width: 380px; /* Slightly wider container */
+    width: 90%;
+    text-align: center;
+    backdrop-filter: blur(5px); /* Add a subtle blur effect behind the container (modern look) */
+}
+
+.login-container h1 {
+    color: #333; /* Dark heading color */
+    margin-bottom: 30px; /* Space below title */
+    font-size: 2.2em; /* Slightly larger title */
+}
+
+.form-group {
+    margin-bottom: 25px; /* Space between form groups */
+    text-align: left;
+    position: relative; /* Needed for icon positioning */
+}
+
+.form-group label {
+    display: none; /* Hide labels, use placeholders in inputs */
+}
+
+.form-group .input-icon {
+     position: absolute;
+     left: 18px; /* Adjust icon position */
+     top: 50%;
+     transform: translateY(-50%);
+     color: #888; /* Icon color */
+     font-size: 1.2em; /* Slightly larger icon */
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: calc(100% - 60px); /* Adjust width for icon and padding */
+    padding: 14px 15px 14px 45px; /* Adjust padding for icon */
+    border: 1px solid #ddd;
+    border-radius: 30px; /* More rounded corners (pill shape) */
+    background-color: #f9f9f9; /* Light background */
+    color: #333;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+ .form-group input[type="text"]::placeholder,
+ .form-group input[type="password"]::placeholder {
+     color: #aaa; /* Placeholder color */
+     font-size: 0.95em; /* Slightly smaller placeholder */
+ }
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+    border-color: #555; /* Darker border on focus */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05), 0 0 10px rgba(85, 85, 85, 0.3); /* Enhanced glow */
+    outline: none;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 0.9em;
+    color: #555; /* Default text color for options */
+}
+
+.options label {
+    display: inline-flex; /* Use flexbox for alignment with checkbox */
+    align-items: center;
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer; /* Indicate it's clickable */
+}
+
+.options input[type="checkbox"] {
+    margin-right: 8px; /* Space between checkbox and label */
+    cursor: pointer;
+}
+
+.options a {
+    color: #555; /* Darker link color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.options a:hover {
+    color: #333; /* Darker color on hover */
+    text-decoration: underline;
+}
+
+.login-button {
+    display: block;
+    width: 100%;
+    background-color: #555; /* Dark grey button color */
+    color: white;
+    padding: 14px; /* Adjust padding */
+    border: none;
+    border-radius: 30px; /* More rounded (pill shape) */
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease; /* Add box-shadow to transition */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* More prominent initial shadow */
+}
+
+.login-button:hover {
+    background-color: #333; /* Darker grey on hover */
+    transform: translateY(-2px); /* Slight lift */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+.login-button:active {
+    transform: translateY(0); /* Press down */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Reduced shadow on active */
+}
+
+/* Error message style */
+.login-container .error-message {
+    color: red; /* Red text for error */
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 0.95em; /* Slightly larger error text */
+    font-weight: bold; /* Bold error text */
+}
+
+/* Basic Responsiveness */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 30px;
+    }
+    .avatar {
+         width: 100px; /* Adjust size */
+         height: 100px; /* Adjust size */
+         font-size: 3.5em; /* Adjust icon size */
+         margin-bottom: 30px; /* Adjust margin */
+    }
+     .login-container h1 {
+        font-size: 2em; /* Adjust size */
+        margin-bottom: 25px; /* Adjust margin */
+    }
+    .form-group input[type="text"],
+    .form-group input[type="password"] {
+         padding: 12px 12px 12px 40px; /* Adjust padding */
+         font-size: 1em; /* Adjust size */
+    }
+    .form-group .input-icon {
+         font-size: 1.1em; /* Adjust size */
+         left: 15px; /* Adjust position */
+    }
+    .options {
+         flex-direction: column;
+         align-items: center; /* Center options */
+         margin-bottom: 25px; /* Adjust margin */
+    }
+    .options label,
+    .options a {
+        margin-bottom: 10px;
+        text-align: center; /* Center text */
+    }
+     .login-button {
+         padding: 12px;
+         font-size: 1.05em;
+    }
+}
+
+/* Login Page Specific Styles Enhancements */
+
+.form-group .password-toggle {
+    position: absolute;
+    right: 15px; /* Position on the right side */
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888; /* Icon color */
+    cursor: pointer;
+    z-index: 2; /* Ensure icon is above input */
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 20px; /* Space above the link */
+    font-size: 0.9em;
+    color: #555; /* Text color */
+}
+
+.signup-link a {
+    color: #555; /* Link color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.signup-link a:hover {
+    color: #333; /* Darker color on hover */
+    text-decoration: underline;
+}
+
+/* Homepage Styles */
+body.home-page {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif; /* Use a better font */
+    background-color: #f8f8f8; /* Light grey background below hero */
+    color: #333;
+}
+
+.hero-section {
+    position: relative;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the entire area */
+    z-index: -2; /* Behind content */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1; /* Above background and overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: white;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 3.5em; /* Larger title */
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow */
+}
+
+.hero-content p {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.abstract-button {
+    background-color: #007bff; /* Primary button color */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px; /* Rounded button */
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none; /* Remove underline from link */
+}
+
+.abstract-button:hover {
+    background-color: #0056b3; /* Darker hover color */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5em;
+    }
+
+    .hero-content p {
+        font-size: 1.2em;
+    }
+
+    .navbar {
+        flex-direction: column; /* Stack nav items on small screens */
+        padding: 15px;
+    }
+
+    .nav-links {
+        margin-top: 10px;
+        display: flex; /* Arrange links in a row */
+        flex-wrap: wrap; /* Allow links to wrap */
+        justify-content: center;
+    }
+
+    .nav-links a {
+        margin: 5px 10px; /* Adjust spacing for wrapped links */
+    }
+}
+
+.history-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filter-button {
+    background-color: #fff; /* White background */
+    border: 1px solid #ddd; /* Light grey border */
+    padding: 8px 15px;
+    border-radius: 20px; /* More rounded corners */
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    color: #555; /* Default text color */
+}
+
+.filter-button.active {
+    background-color: #555; /* Dark background for active */
+    color: white; /* White text for active */
+    border-color: #555; /* Dark border for active */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More prominent shadow for active */
+}
+
+.filter-button:hover:not(.active) {
+    background-color: #f0f0f0; /* Slightly darker background on hover for inactive */
+    border-color: #ccc; /* Slightly darker border on hover for inactive */
+}
+
+/* Add specific styles for the About page */
+body.about-page .container {
+    max-width: 800px; /* Set a max width for the content container */
+    margin-top: 80px; /* Add space below the fixed navbar */
+    padding: 30px; /* Adjust padding */
+    background-color: #fff; /* White background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+body.about-page h1 {
+    color: #333; /* Darken the main heading */
+    text-align: center; /* Center the heading */
+    margin-bottom: 30px; /* More space below the heading */
+}
+
+body.about-page h2 {
+    color: #555; /* Slightly darker subheading color */
+    margin-top: 25px; /* Space above subheadings */
+    margin-bottom: 15px; /* Space below subheadings */
+    border-bottom: 1px solid #eee; /* Add a subtle underline */
+    padding-bottom: 5px; /* Space between text and underline */
+}
+
+body.about-page p {
+    color: #666; /* Slightly lighter paragraph text */
+    line-height: 1.7; /* Increase line height for readability */
+    margin-bottom: 15px; /* Space between paragraphs */
+}
+
+body.about-page .content {
+    margin-top: 20px; /* Space above the main content block */
+}
+
+body.about-page .disclaimer {
+    margin-top: 30px; /* More space above the disclaimer */
+    padding: 20px; /* Increase padding */
+    background-color: #fff8e1; /* Lighter yellow background */
+    border-color: #ffe0b2; /* Lighter orange border */
+    border-left: 5px solid #ff9800; /* Add a left border for emphasis */
+    border-radius: 4px; /* Keep border radius */
+    color: #333; /* Darker text for readability */
+}
+
+body.about-page .disclaimer p {
+    margin-bottom: 0; /* Remove bottom margin for the last paragraph in disclaimer */
+}
+
+body.about-page .abstract-button {
+     margin-top: 20px; /* Add space above the button */
+} 

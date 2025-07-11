@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Oral Cancer Detection System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">Oral Cancer Detection</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow">
+                    <div class="card-body p-5">
+                        <h1 class="mb-4">About the Oral Cancer Detection System</h1>
+                        
+                        <section class="mb-5">
+                            <h3>Project Overview</h3>
+                            <p>The Oral Cancer Detection System is an AI-powered application designed to assist healthcare professionals in the early detection of oral cancer. The system utilizes advanced machine learning algorithms to analyze images of oral tissue and identify potential cancerous regions.</p>
+                            <p>Early detection of oral cancer significantly improves treatment outcomes and survival rates. This tool aims to provide an accessible screening method that can be used in various healthcare settings.</p>
+                        </section>
+                        
+                        <section class="mb-5">
+                            <h3>Technology</h3>
+                            <p>Our system is built on state-of-the-art machine learning technology and implements the following key features:</p>
+                            <ul>
+                                <li>Advanced image processing for oral tissue analysis</li>
+                                <li>Deep learning models trained on thousands of medical images</li>
+                                <li>Particle Swarm Optimization (PSO) for efficient feature selection and model optimization</li>
+                                <li>Interpretable results with confidence scoring</li>
+                            </ul>
+                        </section>
+                        
+                        <section class="mb-5">
+                            <h3>How It Works</h3>
+                            <p>The system follows a simple process:</p>
+                            <ol>
+                                <li>Upload an image of oral tissue</li>
+                                <li>The AI model processes the image through multiple analysis stages</li>
+                                <li>The system identifies potential abnormalities and classifies them</li>
+                                <li>Results are displayed with a confidence score and recommendations</li>
+                            </ol>
+                            <p>The entire process takes only seconds, providing rapid feedback to healthcare providers.</p>
+                        </section>
+                        
+                        <section class="mb-5">
+                            <h3>Important Disclaimer</h3>
+                            <div class="alert alert-warning">
+                                <p>This system is intended as a supplementary tool for healthcare professionals. It should not replace clinical judgment or proper medical diagnosis. The results provided by this system should always be verified by qualified healthcare providers.</p>
+                                <p>If you suspect you might have oral cancer, please consult with a medical professional immediately.</p>
+                            </div>
+                        </section>
+                        
+                        <section>
+                            <h3>Research Background</h3>
+                            <p>This project is based on extensive research in computer vision and medical image analysis. The underlying models have been developed using deep learning techniques and optimized using Particle Swarm Optimization methods.</p>
+                            <p>For more information about the research behind this application, please refer to the associated research publications.</p>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white mt-5 py-4">
+        <div class="container text-center">
+            <p>Oral Cancer Detection System | Powered by AI</p>
+            <p class="small">Disclaimer: This is a research tool and should not replace professional medical advice.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
